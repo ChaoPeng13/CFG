@@ -4,6 +4,7 @@ main_at = list()
 dict_all_label = dict() # Record all functions from .nm file based on the start address
 dict_all_function = dict()
 dict_valid_function = dict() # Record valid functions based on the start address
+list_valid_function = list()
 dict_basicblock = dict() # Record basic blocks based on the start address
 
 
@@ -117,10 +118,25 @@ def GetAllFuncFrom(od):
 				inst.update()
 				func.add_inst(inst)
 
+def Search(func):
+	for name in func.list_call:
+		list_valid_function.append(name)
+		Search(dict_all_function[name])
+
+
 
 def GetValidFunc():
 	for key in dict_all_function:
 		dict_all_function[key].update()
+
+	assert dict_all_function.has_key("main")
+	assert len(dict_valid_function) == 0
+
+	Search(dict_all_function["main"])
+
+	print list_valid_function
+
+
 
 def output2():
 	for key in dict_all_function:
@@ -139,7 +155,7 @@ if __name__ == '__main__':
 	 GetAllFuncFrom(sys.argv[2])
 	 GetValidFunc()
 
-	 output2()
+	 #output2()
 	 #print dict_all_function
 	 #print dict_all_label
 
