@@ -55,11 +55,6 @@ class Function:
 
 			if (inst)
 
-		
-
-
-
-
 
 class Instruction:
 	def __init__ (self, address, exp_hexadecimal, exp_text, inst_type = None, jump_to = None):

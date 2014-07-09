@@ -1,0 +1,11 @@
+digraph G {	main -> memcpy
+	main -> memcpy
+	main -> main_for_body_i
+	main -> main_for_body_i34
+	main -> fir
+	main -> fir_no_red_ld
+	main -> latsynth
+	latsynth -> latsynth_for_body
+	main -> iir1
+	main -> jpegdct
+}

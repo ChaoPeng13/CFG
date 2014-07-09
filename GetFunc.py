@@ -118,10 +118,11 @@ def GetAllFuncFrom(od):
 				inst.update()
 				func.add_inst(inst)
 
-def Search(func):
+def Search(func,f):
 	for name in func.list_call:
 		list_valid_function.append(name)
-		Search(dict_all_function[name])
+		f.write("	%s -> %s\n" % (func.name.replace(".","_"), name.replace(".","_")))
+		Search(dict_all_function[name],f)
 
 
 
@@ -136,7 +137,17 @@ def GetValidFunc():
 
 	print list_valid_function
 
+def GenerateDOT():
+    for key in dict_all_function:
+    	dict_all_function[key].update()
+	assert dict_all_function.has_key("main")
+	assert len(dict_valid_function) == 0
 
+	f = open("out.dot","w")
+	f.writelines("digraph G {")
+	Search(dict_all_function["main"],f) 
+	f.writelines("}")
+	f.close()
 
 def output2():
 	for key in dict_all_function:
@@ -153,7 +164,8 @@ if __name__ == '__main__':
 	 #print dict_all_label
 
 	 GetAllFuncFrom(sys.argv[2])
-	 GetValidFunc()
+	 #GetValidFunc()
+	 GenerateDOT()
 
 	 #output2()
 	 #print dict_all_function
