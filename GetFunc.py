@@ -1,5 +1,8 @@
 import os, glob, sys, pickle, struct, collections
 
+Benchmarks = "benchmarks/"
+Sources = "outs/" 
+
 main_at = list()
 dict_all_label = dict() # Record all functions from .nm file based on the start address
 dict_all_function = dict()
@@ -157,20 +160,16 @@ def output2():
 
 
 if __name__ == '__main__':
-	 assert len(sys.argv) == 3
-	 GetFuncFrom(sys.argv[1])
+	assert len(sys.argv) == 3
+	GetFuncFrom(sys.argv[1])
 	 #assert len(main_at) == 1
-	 print main_at
+	print main_at
 	 #print dict_all_label
 
-	 GetAllFuncFrom(sys.argv[2])
+	GetAllFuncFrom(sys.argv[2])
 	 #GetValidFunc()
-	 GenerateDOT()
+	GenerateDOT()
 
 	 #output2()
 	 #print dict_all_function
 	 #print dict_all_label
-
-
-
-
